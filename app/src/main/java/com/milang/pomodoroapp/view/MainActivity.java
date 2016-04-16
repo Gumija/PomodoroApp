@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import com.milang.pomodoroapp.PomodoroApplication;
 
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements MainView{
         setSupportActionBar(toolbar);
 
         PomodoroApplication.injector.inject(this);
+
+        TextView tv = ((TextView)findViewById(R.id.tvNumber));
+        tv.setText("Hi Mom !!!");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
     @Override
     public void showNumber(int num) {
-        ((TextView)findViewById(R.id.tvNumber)).setText(num);
+        TextView tv = ((TextView)findViewById(R.id.tvNumber));
+        tv.setText(String.format("%1$d", num));
+    }
+
+    public void buttonClicked(View view){
+        mainPresenter.doStuff();
     }
 }
