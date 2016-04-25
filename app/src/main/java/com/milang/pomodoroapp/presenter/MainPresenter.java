@@ -1,9 +1,8 @@
 package com.milang.pomodoroapp.presenter;
 
-import com.milang.pomodoroapp.interactor.IntInteractor;
-
 import javax.inject.Inject;
 import com.milang.pomodoroapp.PomodoroApplication;
+import com.milang.pomodoroapp.interactor.IntInteractor;
 import com.milang.pomodoroapp.view.MainView;
 
 /**
