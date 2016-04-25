@@ -13,4 +13,7 @@ public class InteractorModule {
     public IntInteractor getIntInteractor() {
         return new IntInteractor();
     }
+
+    @Provides
+    public SugarOrmInteractor getSugarOrmInteractor(){return new SugarOrmInteractor();}
 }

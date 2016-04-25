@@ -1,5 +1,6 @@
 package com.milang.pomodoroapp;
 
+import com.milang.pomodoroapp.interactor.SugarOrmInteractor;
 import com.milang.pomodoroapp.presenter.MainPresenter;
 import com.milang.pomodoroapp.view.MainActivity;
 import com.milang.pomodoroapp.view.fragments.ActivityListFragment;
@@ -20,6 +21,8 @@ public interface MainComponent {
     void inject(ToDoTodayFragment toDoTodayFragment);
 
     void inject(RecordsFragment recordsFragment);
+
+    void inject(SugarOrmInteractor sugarOrmInteractor);
 
 //    void inject(IntInteractor intInteractor);
 }

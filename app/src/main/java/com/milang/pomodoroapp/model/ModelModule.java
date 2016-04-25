@@ -10,4 +10,7 @@ import dagger.Provides;
 public class ModelModule {
     @Provides
     public IntModel getIntModel(){ return new IntModel(); }
+
+    @Provides
+    public SugarModel getSugarModel(){ return new SugarModel(); }
 }

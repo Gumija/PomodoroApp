@@ -30,6 +30,42 @@
         android:layout_marginTop="30dp"
         android:padding="10dp"
         android:textSize="30dp"
-        android:id="@+id/btnBtn"
+        android:id="@+id/btnBtnRandom"
         android:onClick="buttonClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:text="First Pomodoro"
+        android:layout_marginTop="80dp"
+        android:padding="10dp"
+        android:textSize="30dp"
+        android:id="@+id/btnBtnFirst"
+        android:onClick="buttonFirstClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:text="Last pomodoro"
+        android:layout_marginTop="130dp"
+        android:padding="10dp"
+        android:textSize="30dp"
+        android:id="@+id/btnBtnLast"
+        android:onClick="buttonLastClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:text="Add new pomodoro"
+        android:layout_marginTop="180dp"
+        android:padding="10dp"
+        android:textSize="30dp"
+        android:id="@+id/btnBtnNew"
+        android:onClick="buttonNewClicked"/>
 </RelativeLayout>

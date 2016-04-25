@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.milang.pomodoroapp.PomodoroApplication;
 
 import com.milang.pomodoroapp.R;
+import com.milang.pomodoroapp.model.PomodoroTask;
 import com.milang.pomodoroapp.presenter.MainPresenter;
 
 import javax.inject.Inject;
@@ -84,7 +85,25 @@ public class MainActivity extends AppCompatActivity implements MainView{
         tv.setText(String.format("%1$d", num));
     }
 
+    @Override
+    public void showPomodoroTaskName(PomodoroTask pomodoroTask) {
+        TextView tv = ((TextView)findViewById(R.id.tvNumber));
+        tv.setText(pomodoroTask.name);
+    }
+
     public void buttonClicked(View view){
         mainPresenter.doStuff();
+    }
+
+    public void buttonFirstClicked(View view) {
+        mainPresenter.showFirstPomodoroTaskName();
+    }
+
+    public void buttonLastClicked(View view) {
+        mainPresenter.showLastPomodoroTaskName();
+    }
+
+    public void buttonNewClicked(View view) {
+        mainPresenter.addNewPomodoro();
     }
 }
