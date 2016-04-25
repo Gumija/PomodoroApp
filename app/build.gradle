@@ -21,10 +21,8 @@ android {
 
     productFlavors{
         prod{
-            buildConfigField 'String', 'FLAVOR', 'prod'
         }
         mock{
-            buildConfigField 'String', 'FLAVOR', 'mock'
         }
     }
 }
