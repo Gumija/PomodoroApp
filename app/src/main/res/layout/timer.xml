@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/InnerRelativeLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true" >
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            android:textSize="20sp"
+            android:id="@+id/tvNumber"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="minutes"
+            android:textSize="20sp"
+            android:id="@+id/tvMinutes"
+            android:layout_toEndOf="@+id/tvNumber"
+            android:layout_marginStart="20dp"/>
+
+        <Button
+            android:text="@string/start"
+            android:id="@+id/Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/textView2"
+            android:layout_marginStart="140dp">
+        </Button>
+</RelativeLayout>

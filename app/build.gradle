@@ -18,10 +18,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors{
+        prod{
+            buildConfigField 'String', 'FLAVOR', 'prod'
+        }
+        mock{
+            buildConfigField 'String', 'FLAVOR', 'mock'
+        }
+    }
 }
+
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.github.satyan:sugar:1.4'
     testCompile 'junit:junit:4.12'
 
     // Dagger 2 and Compiler
