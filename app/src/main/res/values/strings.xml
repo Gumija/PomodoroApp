@@ -2,4 +2,12 @@
     <string name="app_name">PomodoroApp</string>
     <string name="action_settings">Settings</string>
     <string name="btn">New Random</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_activity_list">ActivityListActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_activitylist_fragment">Hello Activity List fragment</string>
+    <string name="hello_todotoday_fragment">Hello To Do Today fragment</string>
+    <string name="hello_records_fragment">Hello Records fragment</string>
+    <string name="title_activity_tabs">Pomodoro App</string>
 </resources>
