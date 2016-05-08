@@ -1,0 +1,204 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: Pomodoro API
+  description: save your tasks with Pomodoro API
+  version: "1.0.0"
+# the domain of the service
+# TODO: set it to the real address, most likely localhost
+host: api.pomodoro.com
+# array of all schemes that your API supports
+schemes:
+  - https
+  - http
+# will be prefixed to all paths
+basePath: /v1
+consumes:
+ - application/json
+produces:
+  - application/json
+paths:
+  /pomodorotasks/all:
+    get:
+      summary: Pomodoro Tasks for a user
+      description: Returns all of the pomodoro tasks of a user.
+      parameters:
+        - name: user
+          in: query
+          description: uuid of the user
+          required: true
+          type: string
+      tags:
+        - Pomodoro
+      responses:
+        200:
+          description: An array of products
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PomodoroTask'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /pomodorotasks/todo:
+    get:
+      summary: Pomodoro Tasks for a user
+      description: Returns pomodoro tasks from the todo list of a user.
+      parameters:
+        - name: user
+          in: query
+          description: uuid of the user
+          required: true
+          type: string
+      tags:
+        - Pomodoro
+      responses:
+        200:
+          description: An array of pomodoros
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PomodoroTask'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /pomodorotasks/activity:
+    get:
+      summary: Pomodoro Tasks for a user
+      description: Returns pomodoro tasks from the activity list of a user.
+      parameters:
+        - name: user
+          in: query
+          description: uuid of the user
+          required: true
+          type: string
+      tags:
+        - Pomodoro
+      responses:
+        200:
+          description: An array of pomodoros
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PomodoroTask'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /pomodorotasks:
+    get:
+      summary: Pomodoro Tasks for a user
+      description: Returns all of the pomodoro tasks of a user.
+      parameters:
+        - name: user
+          in: query
+          description: uuid of the user
+          required: true
+          type: string
+      tags:
+        - Pomodoro
+      responses:
+        200:
+          description: An array of products
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PomodoroTask'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Upload a pomodoro task
+      description: Upload a pomodoro task to the server. Returns the uploaded task.
+      parameters:
+        - name: pomodoro_task
+          in: body
+          description: pomodoro task to upload
+          required: true
+          schema:
+            $ref: '#/definitions/PomodoroTask'
+      tags:
+        - Pomodoro
+      responses:
+        200:
+          description: Success response
+          schema:
+            $ref: '#/definitions/PomodoroTask'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Delete a pomodoro task
+      description: Delete a pomodoro task to the server. Returns the deleted task.
+      parameters:
+        - name: pomodoro_task
+          in: body
+          description: pomodoro task to delete
+          required: true
+          schema:
+            $ref: '#/definitions/PomodoroTask'
+      tags:
+        - Pomodoro
+      responses:
+        200:
+          description: Success response
+          schema:
+            $ref: '#/definitions/PomodoroTask'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  PomodoroTask:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: Unique identifier of a Pomodoro task
+      user_uuid:
+        type: string
+        description: Unique identifier of the owner of the Pomodoro
+      created_on:
+        type: string
+        format: date
+        description: The day the pomodoro task was created
+      finished_on:
+        type: string
+        format: date
+        description: The day the pomodoto task was finished
+      estimate1:
+        type: integer
+        format: int32
+        description: First estimate try
+      estimate2:
+        type: integer
+        format: int32
+        description: Second estimate try
+      estimate3:
+        type: integer
+        format: int32
+        description: Third estimate try
+      is_to_do_today:
+        type: boolean
+        description: Is the task int the todo today list?
+      pomodoros_done:
+        type: integer
+        format: int32
+        description: Number of completed pomodoros
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
