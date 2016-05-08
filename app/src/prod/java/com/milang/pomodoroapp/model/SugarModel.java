@@ -14,7 +14,7 @@ public class SugarModel {
     }
 
     public PomodoroTask getLastPomodoroTask(){
-        PomodoroTask = PomodoroTask.find(PomodoroTask.class,null,null,null,"id DESC","1");
+        return PomodoroTask.find(PomodoroTask.class,null,null,null,"id DESC","1").get(0);
     }
 
     public PomodoroTask getFirstPomodoroTask(){
