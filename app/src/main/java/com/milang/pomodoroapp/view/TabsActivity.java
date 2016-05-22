@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import com.milang.pomodoroapp.PomodoroApplication;
 import com.milang.pomodoroapp.R;
 import com.milang.pomodoroapp.presenter.ActivityListPresenter;
+import com.milang.pomodoroapp.presenter.RecordsPresenter;
+import com.milang.pomodoroapp.presenter.ToDoTodayPresenter;
 import com.milang.pomodoroapp.view.dialog.AddDialogFragment;
 import com.milang.pomodoroapp.view.fragments.ActivityListFragment;
 import com.milang.pomodoroapp.view.fragments.RecordsFragment;
@@ -29,6 +31,12 @@ public class TabsActivity extends AppCompatActivity implements AddDialogFragment
 
     @Inject
     ActivityListPresenter activityListPresenter;
+
+    @Inject
+    ToDoTodayPresenter toDoTodayPresenter;
+
+    @Inject
+    RecordsPresenter recordsPresenter;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -64,6 +72,24 @@ public class TabsActivity extends AppCompatActivity implements AddDialogFragment
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                activityListPresenter.showActivityList();
+                toDoTodayPresenter.showToDoTodayList();
+                recordsPresenter.showRecordsList();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +139,6 @@ public class TabsActivity extends AppCompatActivity implements AddDialogFragment
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog , String name, int estimate) {
-        // TODO: create pomodoro
         activityListPresenter.createPomodoro(name, estimate);
     }
 
@@ -141,9 +166,9 @@ public class TabsActivity extends AppCompatActivity implements AddDialogFragment
                     return f;
                 }
                 case 1:
-                    return ToDoTodayFragment.newInstance("To Do Today", "To Do Today");
+                    return new ToDoTodayFragment();
                 case 2:
-                    return RecordsFragment.newInstance("Records", "Records");
+                    return new RecordsFragment();
                 default:
                     throw new IllegalArgumentException("There are only 3 tabs 0-2. Called with: " + position);
             }

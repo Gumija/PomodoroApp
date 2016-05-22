@@ -17,6 +17,17 @@ public class MainPresenter extends Presenter<MainView> {
     @Inject
     public SugarOrmInteractor sugarOrmInteractor;
 
+    @Inject
+    public ToDoTodayPresenter toDoTodayPresenter;
+
+    @Inject
+    public ActivityListPresenter activityListPresenter;
+
+    public void updateLists(){
+        toDoTodayPresenter.showToDoTodayList();
+        activityListPresenter.showActivityList();
+    }
+
     public MainPresenter() {
         PomodoroApplication.injector.inject(this);
     }

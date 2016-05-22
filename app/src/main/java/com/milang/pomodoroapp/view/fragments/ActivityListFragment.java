@@ -26,7 +26,7 @@ import javax.inject.Inject;
  * Use the {@link ActivityListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ActivityListFragment extends ListFragment implements ActivityListView {
+public class ActivityListFragment extends ListFragment implements ActivityListView, PomodoroListAdapter.PomodoroListAdapterListener {
 
     @Inject
     ActivityListPresenter activityListPresenter;
@@ -62,12 +62,16 @@ public class ActivityListFragment extends ListFragment implements ActivityListVi
             ids.add(p.getId());
         }
 
-        setListAdapter(new PomodoroListAdapter(getActivity(),
+        PomodoroListAdapter pla = new PomodoroListAdapter(getActivity(),
                 names.toArray(new String[0]),
                 dones.toArray(new Integer[0]),
                 estimates.toArray(new Integer[0]),
-                ids.toArray(new Long[0]))
+                ids.toArray(new Long[0]),
+                false
         );
+        pla.attachListener(this);
+
+        setListAdapter(pla);
     }
 
     @Override
@@ -91,5 +95,25 @@ public class ActivityListFragment extends ListFragment implements ActivityListVi
     public void onDestroy() {
         super.onDestroy();
         activityListPresenter.detachView();
+    }
+
+    @Override
+    public void plusOne(long id) {
+        activityListPresenter.plusOnePomodoro(id);
+    }
+
+    @Override
+    public void delete(long id) {
+        activityListPresenter.deletePomodoro(id);
+    }
+
+    @Override
+    public void move(long id) {
+        activityListPresenter.addToTodo(id);
+    }
+
+    @Override
+    public void finish(long id) {
+
     }
 }

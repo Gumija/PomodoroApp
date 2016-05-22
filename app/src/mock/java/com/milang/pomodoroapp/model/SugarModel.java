@@ -3,6 +3,7 @@ package com.milang.pomodoroapp.model;
 import com.milang.pomodoroapp.model.PomodoroTask;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,6 +13,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SugarModel {
 
     private static ArrayList<PomodoroTask> list = new ArrayList<PomodoroTask>();
+
+    private static long idCounter = 1;
 
     public void saveNewRandomPodomoroTask(){
         int name = ThreadLocalRandom.current().nextInt();
@@ -28,11 +31,83 @@ public class SugarModel {
     }
 
     public List<PomodoroTask> getPomodoroTasks(){
-        return list;
+        ArrayList<PomodoroTask> filterd = new ArrayList<>();
+        for (PomodoroTask p: list) {
+            if (p.finishedOn == null){
+                filterd.add(p);
+            }
+        }
+        return filterd;
     }
 
     public void createPomodoro(String name, int estimate) {
         PomodoroTask p = new PomodoroTask(name, estimate, true);
+        p.setId(idCounter++);
         list.add(p);
+    }
+
+    public void plusOnePomodoro(long id) {
+        for (PomodoroTask p: list) {
+            if (p.getId() == id){
+                p.pomodorosDone++;
+                return;
+            }
+        }
+    }
+
+    public void deletePomodoro(long id) {
+        for (PomodoroTask p: list) {
+            if (p.getId() == id){
+                list.remove(p);
+                return;
+            }
+        }
+    }
+
+    public void addToTodo(long id) {
+        for (PomodoroTask p: list) {
+            if (p.getId() == id){
+                p.isToDoToday = true;
+                return;
+            }
+        }
+    }
+
+    public List<PomodoroTask> getToDoTodayTasks() {
+        ArrayList<PomodoroTask> filterd = new ArrayList<>();
+        for (PomodoroTask p: list) {
+            if (p.isToDoToday){
+                filterd.add(p);
+            }
+        }
+        return filterd;
+    }
+
+    public void removeFromTodo(long id) {
+        for (PomodoroTask p: list) {
+            if (p.getId() == id){
+                p.isToDoToday = false;
+                return;
+            }
+        }
+    }
+
+    public List<PomodoroTask> getRecords() {
+        ArrayList<PomodoroTask> filterd = new ArrayList<>();
+        for (PomodoroTask p: list) {
+            if (p.finishedOn != null){
+                filterd.add(p);
+            }
+        }
+        return filterd;
+    }
+
+    public void finishPomodoro(long id) {
+        for (PomodoroTask p: list) {
+            if (p.getId()== id){
+                p.finishedOn = new Date();
+                p.isToDoToday = false;
+            }
+        }
     }
 }

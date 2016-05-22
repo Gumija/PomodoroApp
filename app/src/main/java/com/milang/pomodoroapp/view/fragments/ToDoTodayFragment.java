@@ -4,63 +4,39 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
+import com.milang.pomodoroapp.PomodoroApplication;
 import com.milang.pomodoroapp.R;
+import com.milang.pomodoroapp.model.PomodoroTask;
+import com.milang.pomodoroapp.presenter.ActivityListPresenter;
 import com.milang.pomodoroapp.presenter.ToDoTodayPresenter;
+import com.milang.pomodoroapp.view.adapters.PomodoroListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ToDoTodayFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ToDoTodayFragment extends Fragment implements ToDoTodayView {
+
+public class ToDoTodayFragment extends ListFragment implements ToDoTodayView, PomodoroListAdapter.PomodoroListAdapterListener {
 
     @Inject
     ToDoTodayPresenter toDoTodayPresenter;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ToDoTodayFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ToDoTodayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ToDoTodayFragment newInstance(String param1, String param2) {
-        ToDoTodayFragment fragment = new ToDoTodayFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        PomodoroApplication.injector.inject(this);
     }
 
     @Override
@@ -68,5 +44,68 @@ public class ToDoTodayFragment extends Fragment implements ToDoTodayView {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_to_do_today, container, false);
+    }
+
+    @Override
+    public void showToDoTodayList(List<PomodoroTask> pomodoroTaskList) {
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<Integer> estimates = new ArrayList<>();
+        ArrayList<Integer> dones = new ArrayList<>();
+        ArrayList<Long> ids = new ArrayList<>();
+        for(PomodoroTask p : pomodoroTaskList){
+            names.add(p.name);
+            estimates.add(p.estimate1);
+            dones.add(p.pomodorosDone);
+            ids.add(p.getId());
+        }
+
+        PomodoroListAdapter pla = new PomodoroListAdapter(getActivity(),
+                names.toArray(new String[0]),
+                dones.toArray(new Integer[0]),
+                estimates.toArray(new Integer[0]),
+                ids.toArray(new Long[0]),
+                true
+        );
+        pla.attachListener(this);
+
+        setListAdapter(pla);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        toDoTodayPresenter.attachView(this);
+        toDoTodayPresenter.showToDoTodayList();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        toDoTodayPresenter.detachView();
+    }
+
+    @Override
+    public void plusOne(long id) {
+        toDoTodayPresenter.plusOnePomodoro(id);
+    }
+
+    @Override
+    public void delete(long id) {
+        toDoTodayPresenter.deletePomodoro(id);
+    }
+
+    @Override
+    public void move(long id) {
+        toDoTodayPresenter.removeFromTodo(id);
+    }
+
+    @Override
+    public void finish(long id) {
+        toDoTodayPresenter.finishPomodoro(id);
     }
 }

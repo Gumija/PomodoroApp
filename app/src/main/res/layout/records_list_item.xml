@@ -17,6 +17,13 @@
             android:textSize="20dp"
             android:textStyle="bold"></TextView>
 
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016.04.03 - 2016.04.17"
+            android:textSize="18dp"></TextView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -24,11 +31,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pomodoro status:  "
+                android:text="Estimated:  "
                 android:textSize="18dp"></TextView>
 
             <TextView
-                android:id="@+id/done"
+                android:id="@+id/estimate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3"
@@ -37,11 +44,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="/"
+                android:text="    Completed:  "
                 android:textSize="18dp"></TextView>
 
             <TextView
-                android:id="@+id/estimate"
+                android:id="@+id/done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5"
@@ -49,39 +56,16 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <TextView
-        android:id="@+id/plus_one"
+        android:id="@+id/diff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+1"
-        android:layout_toLeftOf="@+id/delete"
-        android:layout_centerVertical="true"
-        android:textSize="20dp"
-        android:layout_marginRight="5dp"/>
-    <ImageView
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_delete"
-        android:layout_toLeftOf="@+id/move"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dp" />
-    <ImageView
-        android:id="@+id/move"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/arrow_down_float"
-        android:layout_toLeftOf="@+id/finish"
-        android:rotation="-90"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dp"/>
-    <ImageView
-        android:id="@+id/finish"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/arrow_down_float"
         android:layout_alignParentRight="true"
-        android:rotation="-90"
         android:layout_centerVertical="true"
-        android:layout_marginRight="5dp" />
+        android:layout_marginRight="5dp"
+        android:text="+1"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
 </RelativeLayout>
