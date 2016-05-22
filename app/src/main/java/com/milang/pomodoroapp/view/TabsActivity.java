@@ -1,32 +1,34 @@
 package com.milang.pomodoroapp.view;
 
-import android.app.FragmentTransaction;
+
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
-import android.widget.TextView;
-
+import com.milang.pomodoroapp.PomodoroApplication;
 import com.milang.pomodoroapp.R;
+import com.milang.pomodoroapp.presenter.ActivityListPresenter;
 import com.milang.pomodoroapp.view.dialog.AddDialogFragment;
 import com.milang.pomodoroapp.view.fragments.ActivityListFragment;
 import com.milang.pomodoroapp.view.fragments.RecordsFragment;
 import com.milang.pomodoroapp.view.fragments.ToDoTodayFragment;
 
-public class TabsActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+public class TabsActivity extends AppCompatActivity implements AddDialogFragment.AddDialogListener {
+
+    @Inject
+    ActivityListPresenter activityListPresenter;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -48,6 +50,8 @@ public class TabsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
 
+        PomodoroApplication.injector.inject(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -60,26 +64,6 @@ public class TabsActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-        MenuItem mi = (MenuItem)findViewById(R.id.add_pomodoro);
-        mi.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                // DialogFragment.show() will take care of adding the fragment
-                // in a transaction.  We also want to remove any currently showing
-                // dialog, so make our own transaction and take care of that here.
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
-                if (prev != null) {
-                    ft.remove(prev);
-                }
-                ft.addToBackStack(null);
-
-                AddDialogFragment df = new AddDialogFragment();
-                df.show(ft, "dialog");
-                return true;
-            }
-        });
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -110,9 +94,32 @@ public class TabsActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.add_pomodoro) {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            Fragment prev = fm.findFragmentByTag("dialog");
+            if (prev != null) {
+                ft.remove(prev);
+            }
+            ft.addToBackStack(null);
+
+            AddDialogFragment df = new AddDialogFragment();
+            df.show(ft, "dialog");
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog , String name, int estimate) {
+        // TODO: create pomodoro
+        activityListPresenter.createPomodoro(name, estimate);
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+
     }
 
     /**

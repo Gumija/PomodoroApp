@@ -4,6 +4,7 @@ import com.milang.pomodoroapp.interactor.SugarOrmInteractor;
 import com.milang.pomodoroapp.presenter.ActivityListPresenter;
 import com.milang.pomodoroapp.presenter.MainPresenter;
 import com.milang.pomodoroapp.view.MainActivity;
+import com.milang.pomodoroapp.view.TabsActivity;
 import com.milang.pomodoroapp.view.fragments.ActivityListFragment;
 import com.milang.pomodoroapp.view.fragments.RecordsFragment;
 import com.milang.pomodoroapp.view.fragments.ToDoTodayFragment;
@@ -18,6 +19,8 @@ public interface MainComponent {
     void inject(MainPresenter mainPresenter);
 
     void inject(ActivityListPresenter activityListPresenter);
+
+    void inject(TabsActivity tabsActivity);
 
     void inject(ActivityListFragment activityListFragment);
 

@@ -20,4 +20,9 @@ public class ActivityListPresenter extends Presenter<ActivityListView> {
     public void showActivityList() {
         view.showActivityList(sugarOrmInteractor.getPomodoroTasks());
     }
+
+    public void createPomodoro(String name, int estimate) {
+        sugarOrmInteractor.createPomodoro(name, estimate);
+        showActivityList();
+    }
 }

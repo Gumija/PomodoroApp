@@ -30,4 +30,9 @@ public class SugarModel {
     public List<PomodoroTask> getPomodoroTasks(){
         return list;
     }
+
+    public void createPomodoro(String name, int estimate) {
+        PomodoroTask p = new PomodoroTask(name, estimate, true);
+        list.add(p);
+    }
 }

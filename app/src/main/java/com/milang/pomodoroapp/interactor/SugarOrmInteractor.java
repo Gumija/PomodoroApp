@@ -33,4 +33,8 @@ public class SugarOrmInteractor {
     }
 
     public List<PomodoroTask> getPomodoroTasks() {return model.getPomodoroTasks();}
+
+    public void createPomodoro(String name, int estimate) {
+        model.createPomodoro(name, estimate);
+    }
 }
