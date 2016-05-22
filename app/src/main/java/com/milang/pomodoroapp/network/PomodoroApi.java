@@ -1,14 +1,11 @@
 package com.milang.pomodoroapp.network;
 
-import io.swagger.client.CollectionFormats.*;
-
+import com.milang.pomodoroapp.model.PomodoroTask;
 
 import retrofit2.Call;
 import retrofit2.http.*;
 
 import okhttp3.RequestBody;
-
-import io.swagger.client.model.PomodoroTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;

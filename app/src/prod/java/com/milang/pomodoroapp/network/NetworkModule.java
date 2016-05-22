@@ -15,20 +15,12 @@ import retrofit2.Retrofit;
 @Module
 public class NetworkModule {
 
+    private OkHttpHelper okHttpHelper = new OkHttpHelper();
+
     @Provides
     @Singleton
     public OkHttpClient.Builder provideOkHttpClientBuilder() {
-        OkHttpClient.Builder clientBuilder = null;
-        try {
-            clientBuilder = UnsafeClientFactory.getUnsafeClient();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (clientBuilder == null) {
-            throw new RuntimeException("HttpClient cannot be initialized!");
-        }
-
-        return clientBuilder;
+        return provideOkHttpClientBuilder();
     }
 
     @Provides
@@ -40,8 +32,7 @@ public class NetworkModule {
     @Provides
     @Singleton
     public Retrofit provideRetrofit(OkHttpClient client) {
-        return new Retrofit.Builder().baseUrl(NetworkConfig.SERVICE_ENDPOINT).client(client)
-                .addConverterFactory(GsonConverterFactory.create(GsonHelper.getGson())).build();
+        return okHttpHelper.provideRetrofit(client);
     }
 
     @Provides

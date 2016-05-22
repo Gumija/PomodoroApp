@@ -1,5 +1,3 @@
-# this is an example of the Uber API
-# as a demonstration of an API spec in YAML
 swagger: '2.0'
 info:
   title: Pomodoro API
@@ -38,10 +36,6 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PomodoroTask'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
   /pomodorotasks/todo:
     get:
       summary: Pomodoro Tasks for a user
@@ -61,10 +55,6 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PomodoroTask'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
   /pomodorotasks/activity:
     get:
       summary: Pomodoro Tasks for a user
@@ -84,11 +74,6 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PomodoroTask'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-            
   /pomodorotasks:
     get:
       summary: Pomodoro Tasks for a user
@@ -108,10 +93,6 @@ paths:
             type: array
             items:
               $ref: '#/definitions/PomodoroTask'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
     post:
       summary: Upload a pomodoro task
       description: Upload a pomodoro task to the server. Returns the uploaded task.
@@ -129,10 +110,6 @@ paths:
           description: Success response
           schema:
             $ref: '#/definitions/PomodoroTask'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
     delete:
       summary: Delete a pomodoro task
       description: Delete a pomodoro task to the server. Returns the deleted task.
@@ -150,10 +127,6 @@ paths:
           description: Success response
           schema:
             $ref: '#/definitions/PomodoroTask'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
 definitions:
   PomodoroTask:
     type: object
@@ -192,13 +165,3 @@ definitions:
         type: integer
         format: int32
         description: Number of completed pomodoros
-  Error:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      message:
-        type: string
-      fields:
-        type: string

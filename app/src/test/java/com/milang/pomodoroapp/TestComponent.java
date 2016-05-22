@@ -1,17 +1,16 @@
-package com.mtomoskozi.sugarapp;
+package com.milang.pomodoroapp;
 
-import com.mtomoskozi.sugarapp.android.SugarAppApplicationComponent;
-import com.mtomoskozi.sugarapp.interactor.InteractorModule;
-import com.mtomoskozi.sugarapp.network.mock.MockNetworkModule;
+import com.milang.pomodoroapp.ApplicationComponent;
+import com.milang.pomodoroapp.interactor.InteractorModule;
+import com.milang.pomodoroapp.model.ModelModule;
+import com.milang.pomodoroapp.network.NetworkModule;
+import com.milang.pomodoroapp.view.ViewModule;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
 
-/**
- * Created by Máté on 02/05/2016.
- */
 @Singleton
-@Component(modules = {MockNetworkModule.class, TestModule.class, InteractorModule.class})
-public interface TestComponent extends SugarAppApplicationComponent {
+@Component(modules = {NetworkModule.class, TestModule.class, InteractorModule.class})
+public interface TestComponent extends ApplicationComponent {
 }

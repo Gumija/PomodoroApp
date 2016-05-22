@@ -1,7 +1,5 @@
 package com.milang.pomodoroapp.network;
 
-import com.milang.pomodoroapp.network.prod.NetworkModule;
-
 import java.io.IOException;
 
 import javax.inject.Singleton;
@@ -16,12 +14,12 @@ import retrofit2.Retrofit;
 
 @Module
 public class NetworkModule {
-    private NetworkModule networkModule = new NetworkModule();
+    private OkHttpHelper okHttpHelper = new OkHttpHelper();
 
     @Provides
     @Singleton
     public OkHttpClient.Builder provideOkHttpClientBuilder() {
-        return networkModule.provideOkHttpClientBuilder();
+        return okHttpHelper.provideOkHttpClientBuilder();
     }
 
 
@@ -41,7 +39,7 @@ public class NetworkModule {
     @Provides
     @Singleton
     public Retrofit provideRetrofit(OkHttpClient client) {
-        return networkModule.provideRetrofit(client);
+        return okHttpHelper.provideRetrofit(client);
     }
 
     @Provides

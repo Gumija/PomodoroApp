@@ -3,9 +3,6 @@ package com.milang.pomodoroapp.network;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-/**
- * Created by Máté on 01/05/2016.
- */
 public class GsonHelper {
     public static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 

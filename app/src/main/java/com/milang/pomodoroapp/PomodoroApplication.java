@@ -29,4 +29,9 @@ public class PomodoroApplication extends SugarApp {
         super.onTerminate();
         SugarContext.terminate();
     }
+
+    public void setInjector(FlavorComponent appComponent) {
+        injector = appComponent;
+        injector.inject(this);
+    }
 }

@@ -1,8 +1,4 @@
-package com.mtomoskozi.sugarapp;
-
-/**
- * Created by Máté on 02/05/2016.
- */
+package com.milang.pomodoroapp;
 
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;

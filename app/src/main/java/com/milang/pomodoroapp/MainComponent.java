@@ -24,5 +24,7 @@ public interface MainComponent {
 
     void inject(SugarOrmInteractor sugarOrmInteractor);
 
+    void inject(PomodoroApplication app);
+
 //    void inject(IntInteractor intInteractor);
 }

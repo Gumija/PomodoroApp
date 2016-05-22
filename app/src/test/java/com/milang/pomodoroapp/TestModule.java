@@ -1,12 +1,15 @@
-package com.mtomoskozi.sugarapp;
+package com.milang.pomodoroapp;
 
 import android.content.Context;
 
-import com.mtomoskozi.sugarapp.interactor.InteractorModule;
-import com.mtomoskozi.sugarapp.model.prod.ModelModule;
-import com.mtomoskozi.sugarapp.model.prod.PeopleDbModel;
-import com.mtomoskozi.sugarapp.presenter.MainPresenter;
-import com.mtomoskozi.sugarapp.view.ViewModule;
+import com.milang.pomodoroapp.model.IntModel;
+import com.milang.pomodoroapp.model.ModelModule;
+import com.milang.pomodoroapp.model.SugarModel;
+import com.milang.pomodoroapp.presenter.ActivityListPresenter;
+import com.milang.pomodoroapp.presenter.MainPresenter;
+import com.milang.pomodoroapp.presenter.RecordsPresenter;
+import com.milang.pomodoroapp.presenter.ToDoTodayPresenter;
+import com.milang.pomodoroapp.view.ViewModule;
 
 import java.util.concurrent.Executor;
 
@@ -15,9 +18,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by Máté on 02/05/2016.
- */
 @Module
 public class TestModule {
 
@@ -36,12 +36,32 @@ public class TestModule {
     }
 
     @Provides
-    public PeopleDbModel provideLoginPresenter() {
-        return modelModule.providePeopleDbModel();
+    public SugarModel provideSugarModel() {
+        return modelModule.getSugarModel();
     }
 
     @Provides
     public MainPresenter provideMainPresenter() {
-        return viewModule.provideMainPresenter();
+        return viewModule.getMainPresenter();
+    }
+
+    @Provides
+    public ActivityListPresenter provideActivityListPresenter() {
+        return viewModule.getActivityListPresenter();
+    }
+
+    @Provides
+    public ToDoTodayPresenter provideToDoToadyPresenter() {
+        return viewModule.getToDoTodayPresenter();
+    }
+
+    @Provides
+    public RecordsPresenter provideRecordsPresenter() {
+        return viewModule.getRecordsPresenter();
+    }
+
+    @Provides
+    public IntModel provideIntModel() {
+        return modelModule.getIntModel();
     }
 }

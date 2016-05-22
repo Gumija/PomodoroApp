@@ -26,10 +26,12 @@ public class MockInterceptor implements Interceptor {
         Log.d("Test Http Client", "URL call: " + uri.toString());
         Headers headers = request.headers();
 
-        if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "people")) {
-            return PeopleMock.process(request);
-        } else if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "people/add")) {
-            return PeopleMock.process(request);
+        if (uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "pomodorotasks/all")
+            || uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "pomodorotasks/todo")
+            || uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "pomodorotasks/activity")
+            || uri.getPath().startsWith(NetworkConfig.ENDPOINT_PREFIX + "pomodorotasks")
+        ) {
+            return PomodoroTaskMock.process(request);
         } else {
             return makeResponse(request, headers, 404, "Unknown");
         }

@@ -1,4 +1,4 @@
-package com.milang.pomodoroapp;
+package com.milang.pomodoroapp.unittests;
 
 import org.junit.Test;
 
