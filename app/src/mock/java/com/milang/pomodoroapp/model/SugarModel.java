@@ -3,6 +3,7 @@ package com.milang.pomodoroapp.model;
 import com.milang.pomodoroapp.model.PomodoroTask;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -24,5 +25,9 @@ public class SugarModel {
 
     public PomodoroTask getFirstPomodoroTask(){
         return list.get(0);
+    }
+
+    public List<PomodoroTask> getPomodoroTasks(){
+        return list;
     }
 }

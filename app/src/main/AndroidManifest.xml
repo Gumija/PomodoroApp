@@ -33,7 +33,6 @@
             </intent-filter>
 
         </activity>
-        <uses-permission android:name="android.permission.READ_CONTACTS" />
     </application>
 
 </manifest>

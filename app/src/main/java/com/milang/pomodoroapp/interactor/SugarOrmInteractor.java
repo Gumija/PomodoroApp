@@ -4,6 +4,8 @@ import com.milang.pomodoroapp.PomodoroApplication;
 import com.milang.pomodoroapp.model.PomodoroTask;
 import com.milang.pomodoroapp.model.SugarModel;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 /**
@@ -29,4 +31,6 @@ public class SugarOrmInteractor {
     public PomodoroTask getFirstPomodoroTask(){
         return model.getFirstPomodoroTask();
     }
+
+    public List<PomodoroTask> getPomodoroTasks() {return model.getPomodoroTasks();}
 }
