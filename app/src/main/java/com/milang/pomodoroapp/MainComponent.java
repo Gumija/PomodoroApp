@@ -1,5 +1,6 @@
 package com.milang.pomodoroapp;
 
+import com.milang.pomodoroapp.interactor.RestApiInteractor;
 import com.milang.pomodoroapp.interactor.SugarOrmInteractor;
 import com.milang.pomodoroapp.presenter.ActivityListPresenter;
 import com.milang.pomodoroapp.presenter.MainPresenter;
@@ -25,6 +26,8 @@ public interface MainComponent {
     void inject(ToDoTodayPresenter toDoTodayPresenter);
 
     void inject(RecordsPresenter recordsPresenter);
+
+    void inject(RestApiInteractor restApiInteractor);
 
     void inject(TabsActivity tabsActivity);
 

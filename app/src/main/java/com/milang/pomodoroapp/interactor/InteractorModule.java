@@ -16,4 +16,7 @@ public class InteractorModule {
 
     @Provides
     public SugarOrmInteractor getSugarOrmInteractor(){return new SugarOrmInteractor();}
+
+    @Provides
+    public RestApiInteractor getRestApiInteractor(){return new RestApiInteractor(); }
 }

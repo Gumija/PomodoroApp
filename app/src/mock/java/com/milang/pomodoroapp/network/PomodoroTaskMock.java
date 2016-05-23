@@ -15,7 +15,7 @@ import okhttp3.Response;
 
 public class PomodoroTaskMock {
 
-    static List<PomodoroTask> pomodoroTaskList = new ArrayList<>();
+    public static List<PomodoroTask> pomodoroTaskList = new ArrayList<>();
 
     static boolean isInitialised = false;
 
