@@ -2,6 +2,7 @@ package com.milang.pomodoroapp;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
 import com.milang.pomodoroapp.interactor.ComponentFactory;
 import com.milang.pomodoroapp.model.PomodoroTask;
 import com.orm.SugarApp;
@@ -12,6 +13,7 @@ import com.orm.util.SugarConfig;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+import io.fabric.sdk.android.Fabric;
 
 
 /**
@@ -36,6 +38,7 @@ public class PomodoroApplication extends SugarApp {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         injector = ComponentFactory.create(this);
         SugarContext.init(this);
     }

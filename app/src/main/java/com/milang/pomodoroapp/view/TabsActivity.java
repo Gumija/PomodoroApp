@@ -114,16 +114,6 @@ public class TabsActivity extends AppCompatActivity implements AddDialogFragment
 
             }
         });
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
     }
 
 
@@ -156,6 +146,8 @@ public class TabsActivity extends AppCompatActivity implements AddDialogFragment
             AddDialogFragment df = new AddDialogFragment();
             df.show(ft, "dialog");
             return true;
+        } else if(id == R.id.force_crash){
+            throw new RuntimeException("This is a crash");
         }
 
         return super.onOptionsItemSelected(item);

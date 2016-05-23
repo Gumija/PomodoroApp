@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.milang.pomodoroapp.view.TabsActivity">
     <item
+        android:id="@+id/force_crash"
+        android:orderInCategory="100"
+        android:icon="@android:drawable/stat_notify_error"
+        android:title="Force crash"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/add_pomodoro"
         android:orderInCategory="100"
         android:icon="@android:drawable/ic_menu_add"

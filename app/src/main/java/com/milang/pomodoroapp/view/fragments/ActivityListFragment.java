@@ -42,6 +42,7 @@ public class ActivityListFragment extends ListFragment implements ActivityListVi
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         // Obtain the shared Tracker instance.
+        PomodoroApplication.injector.inject(this);
 
     }
 
