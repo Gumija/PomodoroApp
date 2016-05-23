@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.milang.pomodoroapp.PomodoroApplication;
 import com.milang.pomodoroapp.R;
 import com.milang.pomodoroapp.model.PomodoroTask;
@@ -31,6 +33,7 @@ public class ActivityListFragment extends ListFragment implements ActivityListVi
     @Inject
     ActivityListPresenter activityListPresenter;
 
+
     public ActivityListFragment() {
         // Required empty public constructor
     }
@@ -38,8 +41,8 @@ public class ActivityListFragment extends ListFragment implements ActivityListVi
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        // Obtain the shared Tracker instance.
 
-        PomodoroApplication.injector.inject(this);
     }
 
     @Override

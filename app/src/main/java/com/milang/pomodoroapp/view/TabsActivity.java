@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.milang.pomodoroapp.PomodoroApplication;
 import com.milang.pomodoroapp.R;
 import com.milang.pomodoroapp.presenter.ActivityListPresenter;
@@ -53,11 +55,17 @@ public class TabsActivity extends AppCompatActivity implements AddDialogFragment
      */
     private ViewPager mViewPager;
 
+    private Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabs);
 
+        PomodoroApplication.injector.inject(this);
+
+        PomodoroApplication application = (PomodoroApplication) getApplication();
+        mTracker = application.getDefaultTracker();
         PomodoroApplication.injector.inject(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -75,6 +83,22 @@ public class TabsActivity extends AppCompatActivity implements AddDialogFragment
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                String name = "";
+                switch (tab.getPosition()){
+                    case 0:
+                        name = "ActivityList";
+                        break;
+                    case 1:
+                        name = "TodoList";
+                        break;
+                    case 2:
+                        name = "Records";
+                        break;
+
+                }
+                mTracker.setScreenName("Image~" + name);
+                mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
                 activityListPresenter.showActivityList();
                 toDoTodayPresenter.showToDoTodayList();
                 recordsPresenter.showRecordsList();

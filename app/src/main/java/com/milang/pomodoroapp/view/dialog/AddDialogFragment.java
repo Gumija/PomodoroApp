@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.milang.pomodoroapp.PomodoroApplication;
 import com.milang.pomodoroapp.R;
 
 /**
@@ -23,7 +26,7 @@ public class AddDialogFragment extends DialogFragment {
     }
 
     AddDialogListener mListener;
-
+    private Tracker mTracker;
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
@@ -40,6 +43,12 @@ public class AddDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        PomodoroApplication application = (PomodoroApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Image~" + "AddDialog");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -65,6 +74,7 @@ public class AddDialogFragment extends DialogFragment {
                     }
                 });
         builder.setTitle("New Pomodoro");
+
         return builder.create();
     }
 }
